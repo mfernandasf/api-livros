@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "titulo": "valdezzz",
+        "autor": "J.R.R. Tolkien",
+        "genero": "Fantasia",
+        "quantidade": 5
+    },
+    {
+        "id": 2,
+        "titulo": "O Senhor dos An\u00e9is",
+        "autor": "J.R.R. Tolkien",
+        "genero": "Fantasia",
+        "quantidade": 5
+    }
+]

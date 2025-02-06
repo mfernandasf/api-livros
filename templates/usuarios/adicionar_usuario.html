@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Usuário - Sistema de Biblioteca</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilos personalizados (opcional) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="card-title text-center">Adicionar Usuário</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Formulário para adicionar usuário -->
+                        <form id="userForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nome:</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="text" id="telefone" name="telefone" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="curso" class="form-label">Curso:</label>
+                                <input type="text" id="curso" name="curso" class="form-control" required>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                <button type="button" class="btn btn-secondary" onclick="clearForm()">Limpar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS e dependências -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Script JavaScript -->
+    <script>
+        document.getElementById('usuarioForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const form = event.target; 
+            const formData = {
+                name: document.getElementById('name').value,
+                telefone: document.getElementById('telefone').value,
+                curso: document.getElementById('curso').value
+            };
+
+            const response = await fetch('/usuarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const responseMessage = document.getElementById('responseMessage');
+            if (response.ok) {
+                responseMessage.innerHTML = `<div class="alert alert-success">Usuário adicionado com sucesso!</div>`;
+                form.reset(); // Limpa o formulário
+            } else {
+                const errorData = await response.json();
+                responseMessage.innerHTML = `<div class="alert alert-danger">Erro: ${errorData.detail}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>

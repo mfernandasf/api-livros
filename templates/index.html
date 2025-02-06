@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Página Inicial - Biblioteca API{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2 class="text-center mb-4">Bem-vindo à Biblioteca Online</h2>
+        <p class="text-center">
+            Aqui você pode explorar nossa coleção de livros, verificar disponibilidade e muito mais.
+        </p>
+
+        <!-- Lista de livros (dinâmica via API) -->
+         
+        <div class="container">
+            <h1 class="my-4">Livros Disponíveis</h1>
+            <ul class="list-group">
+                {% for livro in livros %}
+                    <li class="list-group-item">
+                        <p>{{livro.titulo}}</p>
+                        <p>{{livro.autor}}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
